@@ -2,8 +2,13 @@ public class Card{
 	private int number;
 	private String color;
 	
-	public void setNumber(int a){
+	public Card(int a, String b){
 		number = a;
+		color = b;
+	}
+	
+	public void setNumber(int x){
+		number = x;
 	} 
 	
 	public void setColor(String a){

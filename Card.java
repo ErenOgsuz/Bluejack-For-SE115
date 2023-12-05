@@ -1,3 +1,4 @@
+import java.util.Random;
 public class Card{
 	private int number;
 	private String color;
@@ -25,5 +26,18 @@ public class Card{
 	
 	public void printCard(){
 		System.out.println(number + ", " + color);
+	}
+	
+	public static Card[] shuffle(Card[] a){
+		Random rnd = new Random();
+		Card[] b = a;
+		for (int i = 0; i < 100 ; i++){
+			int x = rnd.nextInt(a.length);
+			int y = rnd.nextInt(a.length);
+			Card temp = a[x];
+			a[x] = b[y];
+			b[y] = temp;
+		}
+		return a;
 	}
 }

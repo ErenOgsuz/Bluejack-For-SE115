@@ -24,5 +24,11 @@ public class BlueJack{
 					break;
 			}
 		}
+		
+		Card.shuffle(Deck);
+		
+		for (Card p : Deck){
+			p.printCard();
+		}
 	}
 }

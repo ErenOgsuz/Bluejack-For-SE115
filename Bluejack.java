@@ -27,9 +27,9 @@ public class BlueJack{
 		
 		Card.shuffle(Deck);
 		
-		for (Card p : Deck){
+		/*for (Card p : Deck){
 			p.printCard();
-		}
+		}*/
 		
 		int deckTop = 39;
 		int deckBottom = 0;
@@ -45,5 +45,20 @@ public class BlueJack{
 			playerDeck[i].printCard();
 			compDeck[i].printCard();
 		}
+		
+		for(int i = 5; i<8;i++){
+			playerDeck[i] = Card.randomCard();
+			compDeck[i] = Card.randomCard();
+			playerDeck[i].printCard();
+			compDeck[i].printCard();
+		}
+		
+		/*for (Card p : playerDeck){
+			p.printCard();
+		}
+		
+		for (Card p : compDeck){
+			p.printCard();
+		}*/
 	}
 }

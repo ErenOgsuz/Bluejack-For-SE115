@@ -8,6 +8,7 @@ public class Card{
 		color = b;
 	}
 	
+	/*
 	public void setNumber(int x){
 		number = x;
 	} 
@@ -22,7 +23,7 @@ public class Card{
 	
 	public String getColor(){
 		return color;
-	}
+	}*/
 	
 	public void printCard(){
 		System.out.println(number + color);
@@ -39,5 +40,31 @@ public class Card{
 			b[y] = temp;
 		}
 		return a;
+	}
+	
+	public static Card randomCard(){
+		Random rnd = new Random();
+		int colorInt = rnd.nextInt(4);
+		String color = "R";
+		switch(colorInt){
+				case 0:
+					color = "R";
+					break;
+				case 1: 
+					color = "G";
+					break;
+				case 2:
+					color = "Y";
+					break;
+				case 3:
+					color = "B";
+					break;
+		}
+		int minus = rnd.nextInt(2);
+		if(minus == 0){
+			minus = -1;
+		}
+		Card rndCard = new Card(minus*(rnd.nextInt(6)+1),color);
+		return rndCard;
 	}
 }

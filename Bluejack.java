@@ -7,7 +7,7 @@ public class BlueJack{
 		
 		for(int i = 1; i <= 4; i++){
 			for(int j = 1; j<= 10; j++){
-				Deck[counter] = new Card(j,color);
+				Deck[counter] = new Card(j,color,null);
 				//Deck[counter].printCard();
 				counter++;
 			}
@@ -37,28 +37,36 @@ public class BlueJack{
 		Card[] playerDeck = new Card[10];
 		Card[] compDeck = new Card[10];
 		
-		for(int i = 0; i < 5; i++){
-			playerDeck[i] = Deck[deckBottom]; 
-			compDeck[i] = Deck[deckTop];
-			deckTop--;
-			deckBottom++;
-			playerDeck[i].printCard();
-			compDeck[i].printCard();
+		for(int i = 0; i < 10; i++){
+			if(i<5){
+				playerDeck[i] = Deck[deckBottom]; 
+				compDeck[i] = Deck[deckTop];
+				deckTop--;
+				deckBottom++;
+				playerDeck[i].printCard();
+				compDeck[i].printCard();
+			}else if(i<8){
+				playerDeck[i] = Card.randomCard();
+				compDeck[i] = Card.randomCard();
+				playerDeck[i].printCard();
+				compDeck[i].printCard();
+			}else{
+				playerDeck[i] = Card.specialCard();
+				compDeck[i] = Card.specialCard();
+				playerDeck[i].printCard();
+				compDeck[i].printCard();
+			}
 		}
 		
-		for(int i = 5; i<8;i++){
-			playerDeck[i] = Card.randomCard();
-			compDeck[i] = Card.randomCard();
-			playerDeck[i].printCard();
-			compDeck[i].printCard();
+		
+		for (Card p : playerDeck){
+			p.printDeck();
 		}
 		
-		/*for (Card p : playerDeck){
-			p.printCard();
-		}
+		System.out.println();
 		
 		for (Card p : compDeck){
-			p.printCard();
-		}*/
+			p.printDeck();
+		}
 	}
 }

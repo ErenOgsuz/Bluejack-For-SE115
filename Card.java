@@ -2,10 +2,12 @@ import java.util.Random;
 public class Card{
 	private int number;
 	private String color;
+	private String special;
 	
-	public Card(int a, String b){
+	public Card(int a, String b, String c){
 		number = a;
 		color = b;
+		special = c;
 	}
 	
 	/*
@@ -26,7 +28,19 @@ public class Card{
 	}*/
 	
 	public void printCard(){
-		System.out.println(number + color);
+		if(special == null){
+			System.out.println(number + color);
+		}else{
+			System.out.println(special);
+		}
+	}
+	
+	public void printDeck(){
+		if(special == null){
+			System.out.print(number + color + " ");
+		}else{
+			System.out.print(special + " ");
+		}
 	}
 	
 	public static Card[] shuffle(Card[] a){
@@ -64,7 +78,26 @@ public class Card{
 		if(minus == 0){
 			minus = -1;
 		}
-		Card rndCard = new Card(minus*(rnd.nextInt(6)+1),color);
+		Card rndCard = new Card(minus*(rnd.nextInt(6)+1),color,null);
 		return rndCard;
+	}
+	
+	public static Card specialCard(){
+		Random rnd = new Random();
+		int chance = rnd.nextInt(100)+1;
+		int fORd = rnd.nextInt(2);
+		Card specCard;
+		if(chance <= 20){
+			if(fORd == 0){
+				//flip card
+				specCard = new Card(0,null,"+/-");
+			}else{
+				//double card
+				specCard = new Card(0,null,"x2");
+			}
+		}else{
+			specCard = randomCard();
+		}
+		return specCard;
 	}
 }

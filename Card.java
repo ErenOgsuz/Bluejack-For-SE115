@@ -25,7 +25,7 @@ public class Card{
 	}
 	
 	public void printCard(){
-		System.out.println(number + ", " + color);
+		System.out.println(number + color);
 	}
 	
 	public static Card[] shuffle(Card[] a){

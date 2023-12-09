@@ -8,7 +8,7 @@ public class BlueJack{
 		for(int i = 1; i <= 4; i++){
 			for(int j = 1; j<= 10; j++){
 				Deck[counter] = new Card(j,color);
-				Deck[counter].printCard();
+				//Deck[counter].printCard();
 				counter++;
 			}
 			colorCount++;
@@ -29,6 +29,21 @@ public class BlueJack{
 		
 		for (Card p : Deck){
 			p.printCard();
+		}
+		
+		int deckTop = 39;
+		int deckBottom = 0;
+		
+		Card[] playerDeck = new Card[10];
+		Card[] compDeck = new Card[10];
+		
+		for(int i = 0; i < 5; i++){
+			playerDeck[i] = Deck[deckBottom]; 
+			compDeck[i] = Deck[deckTop];
+			deckTop--;
+			deckBottom++;
+			playerDeck[i].printCard();
+			compDeck[i].printCard();
 		}
 	}
 }

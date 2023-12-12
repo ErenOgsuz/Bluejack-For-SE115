@@ -29,7 +29,12 @@ public class Card{
 	
 	public void printCard(){
 		if(special == null){
-			System.out.println(number + color);
+			if(number < 0){
+				System.out.println(number + color);
+			}else{
+				System.out.println("+" + number + color);
+			}
+			
 		}else{
 			System.out.println(special);
 		}
@@ -37,7 +42,12 @@ public class Card{
 	
 	public void printDeck(){
 		if(special == null){
-			System.out.print(number + color + " ");
+			if(number < 0){
+				System.out.print(number + color + " ");
+			}else{
+				System.out.print("+" + number + color + " ");
+			}
+			
 		}else{
 			System.out.print(special + " ");
 		}

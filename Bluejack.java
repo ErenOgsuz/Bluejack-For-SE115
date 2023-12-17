@@ -4,5 +4,7 @@ public class BlueJack{
 		
 		Decks.ConstructDecks();
 		
+		Board.CreateBoard();
+		
 	}
 }

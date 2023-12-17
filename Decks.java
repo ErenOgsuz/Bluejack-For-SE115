@@ -1,21 +1,22 @@
 import java.util.Random;
 public class Decks{
+	
+	static Card[] Deck = new Card[40];
+	static Card[] playerDeck = new Card[10];
+	static Card[] compDeck = new Card[10];
+	static Card[] playerHand = new Card[4];
+	static Card[] compHand = new Card[4];
+	static int deckTop = 39;
+	static int deckBottom = 0;
+		
 	public static void ConstructDecks(){
 		
 		Random rnd = new Random();
-		Card[] Deck = new Card[40];
 		String color = "R";
 		int counter = 0;
 		int colorCount = 0;
 		
-		int deckTop = 39;
-		int deckBottom = 0;
 		
-		Card[] playerDeck = new Card[10];
-		Card[] compDeck = new Card[10];
-		
-		Card[] playerHand = new Card[4];
-		Card[] compHand = new Card[4];
 		
 		//Create game deck
 		for(int i = 1; i <= 4; i++){
@@ -95,7 +96,7 @@ public class Decks{
 			}
 		}
 		
-		/*
+		
 		for (Card p : playerHand){
 			p.printDeck();
 		}
@@ -104,7 +105,7 @@ public class Decks{
 		for (Card p : compHand){
 			p.printDeck();
 		}
-		System.out.println();*/
+		System.out.println();
 	}
 	
 }

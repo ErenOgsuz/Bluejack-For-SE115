@@ -3,7 +3,11 @@ public class Board{
 		System.out.println("---------------------------------------");
 		System.out.println("Computer Hand    | " + "X X X X");
 		System.out.println("---------------------------------------");
-		System.out.println("Computer Board   | " );
+		System.out.print("Computer Board   | " );
+		for(Card p: Decks.compBoard){
+			p.printDeck();
+		}
+		System.out.println("");
 		System.out.println("---------------------------------------");
 		System.out.print("Player Board     | " );
 		for(Card p: Decks.playerBoard){

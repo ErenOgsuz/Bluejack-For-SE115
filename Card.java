@@ -10,6 +10,10 @@ public class Card{
 		special = c;
 	}
 	
+	public int getNumber(){
+		return number;
+	}
+	
 	/*
 	public void setNumber(int x){
 		number = x;
@@ -17,10 +21,6 @@ public class Card{
 	
 	public void setColor(String a){
 		color = a;
-	}
-	
-	public int getNumber(){
-		return number;
 	}
 	
 	public String getColor(){

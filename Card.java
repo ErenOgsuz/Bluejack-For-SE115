@@ -41,7 +41,10 @@ public class Card{
 	}
 	
 	public void printDeck(){
-		if(special == null){
+		if(color == null && special == null){
+			System.out.print("");
+		}
+		else if(special == null){
 			if(number < 0){
 				System.out.print(number + color + " ");
 			}else{

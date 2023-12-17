@@ -6,6 +6,8 @@ public class Decks{
 	static Card[] compDeck = new Card[10];
 	static Card[] playerHand = new Card[4];
 	static Card[] compHand = new Card[4];
+	static Card[] compBoard = new Card[9];
+	static Card[] playerBoard = new Card[9];
 	static int deckTop = 39;
 	static int deckBottom = 0;
 		
@@ -72,7 +74,7 @@ public class Decks{
 		}
 		System.out.println();*/
 		
-		//Creates player and computer decks
+		//Creates player and computer hands
 		for(int i = 0; i < 4; i++){
 			int indexp = 0;
 			int indexc = 0;
@@ -96,7 +98,7 @@ public class Decks{
 			}
 		}
 		
-		
+		//Prints player hands
 		for (Card p : playerHand){
 			p.printDeck();
 		}
@@ -106,6 +108,12 @@ public class Decks{
 			p.printDeck();
 		}
 		System.out.println();
+		
+		for(int i = 0; i < 9; i++){
+			playerBoard[i] = new Card(0,null,null);
+			compBoard[i] = new Card(0,null,null);
+			
+		}
 	}
 	
 }

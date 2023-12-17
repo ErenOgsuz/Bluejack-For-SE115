@@ -4,6 +4,16 @@ public class Game{
 	private static boolean playerTurn = false;
 	private static boolean compTurn = false;
 	private static boolean playerStand = false;
+	private static boolean compStand = false;
+	
+	public static void GameRun(){
+		int pBIndex = 0;
+		//Board asks for a card
+		Decks.playerBoard[pBIndex] = AskCard();
+		pBIndex++;
+		
+		Board.CreateBoard();
+	}
 	
 	//ask a card
 	public static Card AskCard(){

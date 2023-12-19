@@ -1,5 +1,8 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 public class Game{
+	
+	private static Scanner sc = new Scanner(System.in);
 	
 	private static boolean playerTurn = true;
 	private static boolean compTurn = false;
@@ -51,6 +54,10 @@ public class Game{
 			compWin = false;
 			playerStand = false;
 			compStand = false;
+			pBIndex = 0;
+			cBIndex = 0;
+			playerSum = 0;
+			compSum = 0;
 			gameSet++;
 			System.out.println("Set bitti");
 			for(int i= 0; i< Decks.playerBoard.length; i++){
@@ -59,7 +66,7 @@ public class Game{
 			for(int i= 0; i< Decks.compBoard.length; i++){
 				Decks.compBoard[i] = new Card(0,null,null);
 			}
-		}while(gameSet < 4);
+		}while(gameSet < 3);
 		System.out.println("Oyun bitti");
 		
 	}
@@ -71,19 +78,46 @@ public class Game{
 		return asked;
 	}
 	
+	public static int Choose(int max) {
+        int a = 0;
+
+        while (true) {
+            try {
+                System.out.print("Enter your choice: ");
+                if (sc.hasNextInt()) {
+					a = sc.nextInt();
+					if(a>0 && a<= max){
+						break;
+					}else{
+						System.out.println("Invalid input. Please try again.");
+					}
+                } else {
+                    System.out.println("Invalid input. Please try again.");
+                    sc.next();
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please try again.");
+                sc.next();
+            }
+        }
+		System.out.println("");
+        return a;
+    }
+	
 	//player chooses (end turn, stand, play a card from hand)
 	public static void PlayerTurn(){
-		System.out.println("Oyuncunun turu");
-		Scanner sc = new Scanner(System.in);
+		System.out.println("Player's turn:");
 		int choose = 0;
 		Decks.playerBoard[pBIndex] = AskCard();
 		pBIndex++;
 		Board.CreateBoard();
 		
-		while(playerTurn && !playerBust && !playerStand){
-			System.out.println("What do you want to do:");
-			System.out.println("1: End Turn, 2: Stand, 3: Choose A Card");
-			choose = sc.nextInt();
+		
+		System.out.println("What do you want to do:");
+		System.out.println("1: End Turn, 2: Stand, 3: Choose A Card");
+		
+		choose = Choose(3);
+			
 			switch(choose){
 				case 1:
 					//end turn
@@ -124,7 +158,7 @@ public class Game{
 					//play a card from hand
 					playerSum = 0;
 					System.out.println("Which card you want to choose? 1, 2, 3 or 4");
-					choose = sc.nextInt();
+					choose = Choose(4);
 					Decks.playerBoard[pBIndex] = Decks.playerHand[choose-1];
 					pBIndex++;
 					Board.CreateBoard();
@@ -143,7 +177,6 @@ public class Game{
 					playerTurn = false;
 					break;
 			}
-		}
 	}
 	
 	public static void CompTurn(){
@@ -158,8 +191,6 @@ public class Game{
 			compSum = compSum + p.getNumber();
 		}
 		
-		while(compTurn && !compBust && !compStand){
-			
 			//An algorithm for computer to choose
 			if(compSum < 15){
 				choose = 1;
@@ -247,6 +278,6 @@ public class Game{
 					compTurn = false;
 					break;
 			}
-		}
+		
 	}
 }

@@ -9,10 +9,13 @@ public class Game{
 	private static boolean compBust = false;
 	private static int pBIndex = 0;
 	private static int cBIndex = 0;
+	private static int playerSum = 0;
+	private static int compSum = 0;
 	
 	public static void GameRun(){
 		
 		do{
+			do{
 			if(!playerStand){
 				playerTurn = true;
 				PlayerTurn();
@@ -21,7 +24,15 @@ public class Game{
 				compTurn = true;
 				CompTurn();
 			}
-		}while(!playerBust && !compBust);
+			}while(!playerBust && !compBust);
+			if(compBust){
+				playerWin ++;
+			}else if(playerBust){
+				computerWin ++;
+			}
+			gameSet++;
+		}while(gameSet < 4);
+		
 	}
 	
 	//ask a card
@@ -43,14 +54,14 @@ public class Game{
 			System.out.println("What do you want to do:");
 			System.out.println("1: End Turn, 2: Stand, 3: Choose A Card");
 			choose = sc.nextInt();
-			int sum = 0;
 			switch(choose){
 				case 1:
 					//end turn
+					playerSum = 0;
 					for(Card p: Decks.playerBoard){
-						sum = sum + p.getNumber();
+						playerSum = playerSum + p.getNumber();
 					}
-					if(sum > 20){
+					if(playerSum > 20){
 							playerBust = true;
 							System.out.println("You are bust!");
 							//Start a new game
@@ -59,10 +70,11 @@ public class Game{
 					break;
 				case 2:
 					//stand
+					playerSum = 0;
 					for(Card p: Decks.playerBoard){
-						sum = sum + p.getNumber();
+						playerSum = playerSum + p.getNumber();
 					}
-					if(sum > 20){
+					if(playerSum > 20){
 							playerBust = true;
 							System.out.println("You are bust!");
 							//Start a new game
@@ -72,15 +84,16 @@ public class Game{
 					break;
 				case 3:
 					//play a card from hand
+					playerSum = 0;
 					System.out.println("Which card you want to choose? 1, 2, 3 or 4");
 					choose = sc.nextInt();
 					Decks.playerBoard[pBIndex] = Decks.playerHand[choose-1];
 					pBIndex++;
 					Board.CreateBoard();
 					for(Card p: Decks.playerBoard){
-						sum = sum + p.getNumber();
+						playerSum = playerSum + p.getNumber();
 					}
-					if(sum > 20){
+					if(playerSum > 20){
 							playerBust = true;
 							System.out.println("You are bust!");
 							//Start a new game
@@ -96,19 +109,55 @@ public class Game{
 		cBIndex++;
 		Board.CreateBoard();
 		int choose = 1;
+		int chooseCard = 0;
+		compSum = 0;
+		for(Card p: Decks.compBoard){
+			compSum = compSum + p.getNumber();
+		}
+		
 		while(compTurn && !compBust && !compStand){
 			
 			//An algorithm for computer to choose
+			if(compSum < 15){
+				choose = 1;
+			}else if((compSum >= 15 && compSum < 20)|| compSum > 20){
+				for(int i= 0; i < Decks.compHand.length; i++){
+					if(Decks.compHand[i].getNumber() + compSum == 20){
+						//use this card
+						choose = 3;
+						chooseCard = i;
+					}else{
+						if(Decks.compHand[i].getNumber() == 0){
+							if(Decks.compHand[i].getSpecial().equals("x2")){
+								if(compSum + Decks.compBoard[cBIndex-1].getNumber() == 20){
+									//use this card
+									choose = 3;
+									chooseCard = i;
+								}
+							}else if(Decks.compHand[i].getSpecial().equals("+/-")){
+								if(compSum + (Decks.compBoard[cBIndex-1].getNumber() * -2) == 20){
+									//use this card
+									choose = 3;
+									chooseCard = i;
+								}
+							}else{
+								choose = 2;
+							}
+						}else{
+							choose = 2;
+						}
+					}
+				}
+			}else if(compSum == 20){
+				choose = 2;
+			}else{
+				choose = 1;
+			}
 			
-			int sum = 0;
 			switch(choose){
-				
 				case 1:
 					//end turn
-					for(Card p: Decks.compBoard){
-						sum = sum + p.getNumber();
-					}
-					if(sum > 20){
+					if(compSum > 20){
 							compBust = true;
 							System.out.println("Computer is bust!");
 							//Start a new game
@@ -117,10 +166,7 @@ public class Game{
 					break;
 				case 2:
 					//stand
-					for(Card p: Decks.compBoard){
-						sum = sum + p.getNumber();
-					}
-					if(sum > 20){
+					if(compSum > 20){
 							compBust = true;
 							System.out.println("Computer is bust!");
 							//Start a new game
@@ -129,14 +175,17 @@ public class Game{
 					compStand = true;
 					break;
 				case 3:
-					//play a card from hand
-					Decks.compBoard[cBIndex] = Decks.compHand[choose-1];
+					//An algorithm for computer to choose again
+					
+					Decks.compBoard[cBIndex] = Decks.compHand[chooseCard];
+					Decks.compHand[chooseCard] = null;
 					cBIndex++;
 					Board.CreateBoard();
+					compSum = 0;
 					for(Card p: Decks.compBoard){
-						sum = sum + p.getNumber();
+						compSum = compSum + p.getNumber();
 					}
-					if(sum > 20){
+					if(compSum > 20){
 							compBust = true;
 							System.out.println("Computer is bust!");
 							//Start a new game
@@ -146,8 +195,4 @@ public class Game{
 			}
 		}
 	}
-	
-	//check if player bust
-	
-	//check win conditions
 }

@@ -14,6 +14,10 @@ public class Card{
 		return number;
 	}
 	
+	public String getSpecial(){
+		return special;
+	}
+	
 	/*
 	public void setNumber(int x){
 		number = x;

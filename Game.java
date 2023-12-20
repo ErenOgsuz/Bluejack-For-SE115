@@ -13,17 +13,34 @@ public class Game{
 	private static boolean playerWin = false;
 	private static boolean compWin = false;
 	private static int playerWinRound = 0;
-	private static int compWinRound = 1;
+	private static int compWinRound = 0;
 	private static int gameSet = 0;
 	private static int pBIndex = 0;
 	private static int cBIndex = 0;
 	private static int playerSum = 0;
 	private static int compSum = 0;
 	
+	public static int GetPlayerWin(){
+		return playerWinRound;
+	}
+	
+	public static int GetCompWin(){
+		return compWinRound;
+	}
+	
+	public static void SetPlayerWin(){
+		playerWinRound++;
+	}
+	
+	public static void SetCompWin(){
+		compWinRound++;
+	}
+	
 	public static void GameRun(){
 		
 		do{
-			System.out.println("Yeni set başlıyor");
+			System.out.println("New Set Begins");
+			System.out.println("");
 			do{
 			if(!playerStand){
 				playerTurn = true;
@@ -36,16 +53,16 @@ public class Game{
 			}while((!playerBust) && (!compBust) && (!playerWin) && (!compWin));
 			
 			if(compBust){
-				playerWinRound ++;
+				SetPlayerWin();
 				System.out.println("Player won the set");
 			}else if(playerBust){
-				compWinRound ++;
+				SetCompWin();
 				System.out.println("Computer won the set");
 			}else if(playerWin){
-				playerWinRound ++;
+				SetPlayerWin();
 				System.out.println("Player won the set");
 			}else if(compWin){
-				compWinRound ++;
+				SetCompWin();
 				System.out.println("Computer won the set");
 			}
 			compBust = false;
@@ -59,7 +76,7 @@ public class Game{
 			playerSum = 0;
 			compSum = 0;
 			gameSet++;
-			System.out.println("Set bitti");
+			System.out.println("Set is over");
 			for(int i= 0; i< Decks.playerBoard.length; i++){
 				Decks.playerBoard[i] = new Card(0,null,null);
 			}
@@ -67,7 +84,7 @@ public class Game{
 				Decks.compBoard[i] = new Card(0,null,null);
 			}
 		}while(gameSet < 3);
-		System.out.println("Oyun bitti");
+		System.out.println("Game Over");
 		
 	}
 	
@@ -107,6 +124,7 @@ public class Game{
 	//player chooses (end turn, stand, play a card from hand)
 	public static void PlayerTurn(){
 		System.out.println("Player's turn:");
+		System.out.println("");
 		int choose = 0;
 		Decks.playerBoard[pBIndex] = AskCard();
 		pBIndex++;
@@ -180,7 +198,8 @@ public class Game{
 	}
 	
 	public static void CompTurn(){
-		System.out.println("Computer's turn");
+		System.out.println("Computer's turn:");
+		System.out.println("");
 		Decks.compBoard[cBIndex] = AskCard();
 		cBIndex++;
 		Board.CreateBoard();
@@ -234,6 +253,7 @@ public class Game{
 					if(compSum > 20){
 						compBust = true;
 						System.out.println("Computer is bust!");
+						System.out.println("");
 						playerWin = true;
 						//Start a new game
 					}else if(compSum == 20){
@@ -247,6 +267,7 @@ public class Game{
 					if(compSum > 20){
 						compBust = true;
 						System.out.println("Computer is bust!");
+						System.out.println("");
 						playerWin = true;
 						//Start a new game
 					}else if(compSum == 20){
@@ -258,6 +279,7 @@ public class Game{
 				case 3:
 					//An algorithm for computer to choose again
 					System.out.println("Computer played a card");
+					System.out.println("");
 					Decks.compBoard[cBIndex] = Decks.compHand[chooseCard];
 					Decks.compHand[chooseCard] = new Card(0,"","");
 					cBIndex++;
@@ -269,6 +291,7 @@ public class Game{
 					if(compSum > 20){
 							compBust = true;
 							System.out.println("Computer is bust!");
+							System.out.println("");
 							playerWin = true;
 							//Start a new game
 					}else if(compSum == 20){

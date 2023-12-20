@@ -92,9 +92,9 @@ public class BlueJack{
     try {
         String[] newScores = new String[MAX_GAMES];
 
-        System.arraycopy(scores, 0, newScores, 0, Math.min(MAX_GAMES, scores.length));
+        System.arraycopy(scores, 1, newScores, 0, Math.min(MAX_GAMES - 1, scores.length - 1));
 
-        newScores[Math.min(MAX_GAMES - 1, scores.length)] = "Player:" + Game.GetPlayerWin() + " - " +
+        newScores[Math.min(MAX_GAMES - 1, scores.length - 1)] = "Player:" + Game.GetPlayerWin() + " - " +
                 "Computer:" + Game.GetCompWin() + ", " + dtf.format(now);
 
         FileWriter writer = new FileWriter(FILE_PATH);

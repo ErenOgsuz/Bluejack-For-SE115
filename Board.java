@@ -5,19 +5,19 @@ public class Board{
 		System.out.println("Computer Hand    | " + "X X X X");
 		System.out.println("---------------------------------------");
 		System.out.print("Computer Board   | " );
-		for(Card p: Decks.compBoard){
+		for(Card p: Decks.GetCompBoard()){
 			p.printDeck();
 		}
 		System.out.println("");
 		System.out.println("---------------------------------------");
 		System.out.print("Player Board     | " );
-		for(Card p: Decks.playerBoard){
+		for(Card p: Decks.GetPlayerBoard()){
 			p.printDeck();
 		}
 		System.out.println("");
 		System.out.println("---------------------------------------");
 		System.out.print("Player Hand      | "); 
-		for(Card p: Decks.playerHand){
+		for(Card p: Decks.GetPlayerHand()){
 			p.printDeck();
 		}
 		System.out.println("");

@@ -1,15 +1,55 @@
 import java.util.Random;
 public class Decks{
 	
-	static Card[] Deck = new Card[40];
-	static Card[] playerDeck = new Card[10];
-	static Card[] compDeck = new Card[10];
-	static Card[] playerHand = new Card[4];
-	static Card[] compHand = new Card[4];
-	static Card[] compBoard = new Card[9];
-	static Card[] playerBoard = new Card[9];
-	static int deckTop = 39;
-	static int deckBottom = 0;
+	private static Card[] Deck = new Card[40];
+	private static Card[] playerDeck = new Card[10];
+	private static Card[] compDeck = new Card[10];
+	private static Card[] playerHand = new Card[4];
+	private static Card[] compHand = new Card[4];
+	private static Card[] compBoard = new Card[9];
+	private static Card[] playerBoard = new Card[9];
+	private static int deckTop = 39;
+	private static int deckBottom = 0;
+	
+	public static Card[] GetDeck(){
+		return Deck;
+	}
+	
+	public static Card[] GetPlayerDeck(){
+		return playerDeck;
+	}
+	
+	public static Card[] GetCompDeck(){
+		return compDeck;
+	}
+	
+	public static Card[] GetPlayerHand(){
+		return playerHand;
+	}
+	
+	public static Card[] GetCompHand(){
+		return compHand;
+	}
+	
+	public static Card[] GetCompBoard(){
+		return compBoard;
+	}
+	
+	public static Card[] GetPlayerBoard(){
+		return playerBoard;
+	}
+	
+	public static int GetDeckTop(){
+		return deckTop;
+	}
+	
+	public static void SetDeckTop(int a){
+		deckTop = deckTop + a;
+	}
+	
+	public static int GetDeckBottom(){
+		return deckBottom;
+	}
 		
 	public static void ConstructDecks(){
 		

@@ -77,11 +77,11 @@ public class Game{
 			compSum = 0;
 			gameSet++;
 			System.out.println("Set is over");
-			for(int i= 0; i< Decks.playerBoard.length; i++){
-				Decks.playerBoard[i] = new Card(0,null,null);
+			for(int i= 0; i< Decks.GetPlayerBoard().length; i++){
+				Decks.GetPlayerBoard()[i] = new Card(0,null,null);
 			}
-			for(int i= 0; i< Decks.compBoard.length; i++){
-				Decks.compBoard[i] = new Card(0,null,null);
+			for(int i= 0; i< Decks.GetCompBoard().length; i++){
+				Decks.GetCompBoard()[i] = new Card(0,null,null);
 			}
 		}while(gameSet < 3);
 		System.out.println("Game Over");
@@ -90,8 +90,8 @@ public class Game{
 	
 	//ask a card
 	public static Card AskCard(){
-		Card asked = Decks.Deck[Decks.deckTop];
-		Decks.deckTop--;
+		Card asked = Decks.GetDeck()[Decks.GetDeckTop()];
+		Decks.SetDeckTop(-1);
 		return asked;
 	}
 	
@@ -126,7 +126,7 @@ public class Game{
 		System.out.println("Player's turn:");
 		System.out.println("");
 		int choose = 0;
-		Decks.playerBoard[pBIndex] = AskCard();
+		Decks.GetPlayerBoard()[pBIndex] = AskCard();
 		pBIndex++;
 		Board.CreateBoard();
 		
@@ -140,7 +140,7 @@ public class Game{
 				case 1:
 					//end turn
 					playerSum = 0;
-					for(Card p: Decks.playerBoard){
+					for(Card p: Decks.GetPlayerBoard()){
 						playerSum = playerSum + p.getNumber();
 					}
 					if(playerSum > 20){
@@ -157,7 +157,7 @@ public class Game{
 				case 2:
 					//stand
 					playerSum = 0;
-					for(Card p: Decks.playerBoard){
+					for(Card p: Decks.GetPlayerBoard()){
 						playerSum = playerSum + p.getNumber();
 					}
 					if(playerSum > 20){
@@ -177,10 +177,10 @@ public class Game{
 					playerSum = 0;
 					System.out.println("Which card you want to choose? 1, 2, 3 or 4");
 					choose = Choose(4);
-					Decks.playerBoard[pBIndex] = Decks.playerHand[choose-1];
+					Decks.GetPlayerBoard()[pBIndex] = Decks.GetPlayerHand()[choose-1];
 					pBIndex++;
 					Board.CreateBoard();
-					for(Card p: Decks.playerBoard){
+					for(Card p: Decks.GetPlayerBoard()){
 						playerSum = playerSum + p.getNumber();
 					}
 					if(playerSum > 20){
@@ -200,13 +200,13 @@ public class Game{
 	public static void CompTurn(){
 		System.out.println("Computer's turn:");
 		System.out.println("");
-		Decks.compBoard[cBIndex] = AskCard();
+		Decks.GetCompBoard()[cBIndex] = AskCard();
 		cBIndex++;
 		Board.CreateBoard();
 		int choose = 2;
 		int chooseCard = 0;
 		compSum = 0;
-		for(Card p: Decks.compBoard){
+		for(Card p: Decks.GetCompBoard()){
 			compSum = compSum + p.getNumber();
 		}
 		
@@ -214,21 +214,21 @@ public class Game{
 			if(compSum < 15){
 				choose = 1;
 			}else if((compSum >= 15 && compSum < 20)|| compSum > 20){
-				for(int i= 0; i < Decks.compHand.length; i++){
-					if(Decks.compHand[i].getNumber() + compSum == 20){
+				for(int i= 0; i < Decks.GetCompHand().length; i++){
+					if(Decks.GetCompHand()[i].getNumber() + compSum == 20){
 						//use this card
 						choose = 3;
 						chooseCard = i;
 					}else{
-						if(Decks.compHand[i].getNumber() == 0){
-							if(Decks.compHand[i].getSpecial().equals("x2")){
-								if(compSum + Decks.compBoard[cBIndex-1].getNumber() == 20){
+						if(Decks.GetCompHand()[i].getNumber() == 0){
+							if(Decks.GetCompHand()[i].getSpecial().equals("x2")){
+								if(compSum + Decks.GetCompBoard()[cBIndex-1].getNumber() == 20){
 									//use this card
 									choose = 3;
 									chooseCard = i;
 								}
-							}else if(Decks.compHand[i].getSpecial().equals("+/-")){
-								if(compSum + (Decks.compBoard[cBIndex-1].getNumber() * -2) == 20){
+							}else if(Decks.GetCompHand()[i].getSpecial().equals("+/-")){
+								if(compSum + (Decks.GetCompBoard()[cBIndex-1].getNumber() * -2) == 20){
 									//use this card
 									choose = 3;
 									chooseCard = i;
@@ -280,12 +280,12 @@ public class Game{
 					//An algorithm for computer to choose again
 					System.out.println("Computer played a card");
 					System.out.println("");
-					Decks.compBoard[cBIndex] = Decks.compHand[chooseCard];
-					Decks.compHand[chooseCard] = new Card(0,"","");
+					Decks.GetCompBoard()[cBIndex] = Decks.GetCompHand()[chooseCard];
+					Decks.GetCompHand()[chooseCard] = new Card(0,"","");
 					cBIndex++;
 					Board.CreateBoard();
 					compSum = 0;
-					for(Card p: Decks.compBoard){
+					for(Card p: Decks.GetCompBoard()){
 						compSum = compSum + p.getNumber();
 					}
 					if(compSum > 20){

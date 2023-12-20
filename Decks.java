@@ -14,41 +14,46 @@ public class Decks{
 	public static Card[] GetDeck(){
 		return Deck;
 	}
-	
 	public static Card[] GetPlayerDeck(){
 		return playerDeck;
 	}
-	
 	public static Card[] GetCompDeck(){
 		return compDeck;
 	}
-	
 	public static Card[] GetPlayerHand(){
 		return playerHand;
 	}
-	
 	public static Card[] GetCompHand(){
 		return compHand;
 	}
-	
 	public static Card[] GetCompBoard(){
 		return compBoard;
 	}
-	
 	public static Card[] GetPlayerBoard(){
 		return playerBoard;
 	}
-	
 	public static int GetDeckTop(){
 		return deckTop;
 	}
-	
 	public static void SetDeckTop(int a){
 		deckTop = deckTop + a;
 	}
-	
 	public static int GetDeckBottom(){
 		return deckBottom;
+	}
+	
+	public static void UpdatePlayerHand(int a){
+		playerHand[a] = new Card(0,null,null);
+		for(int i = 0; i < playerHand.length; i++){
+			try{
+				if(playerHand[i].getNumber() == 0 && playerHand[i].getSpecial() == null){
+					playerHand[i] = playerHand[i+1];
+					playerHand[i+1] = new Card(0,null,null);
+				}
+			}catch(Exception e){
+				
+			}
+		}
 	}
 		
 	public static void ConstructDecks(){
@@ -57,8 +62,6 @@ public class Decks{
 		String color = "R";
 		int counter = 0;
 		int colorCount = 0;
-		
-		
 		
 		//Create game deck
 		for(int i = 1; i <= 4; i++){
@@ -139,7 +142,7 @@ public class Decks{
 		}
 		
 		//Prints player hands
-		for (Card p : playerHand){
+		/*for (Card p : playerHand){
 			p.printDeck();
 		}
 		System.out.println();
@@ -147,7 +150,7 @@ public class Decks{
 		for (Card p : compHand){
 			p.printDeck();
 		}
-		System.out.println();
+		System.out.println();*/
 		
 		for(int i = 0; i < 9; i++){
 			playerBoard[i] = new Card(0,null,null);

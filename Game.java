@@ -175,9 +175,21 @@ public class Game{
 				case 3:
 					//play a card from hand
 					playerSum = 0;
-					System.out.println("Which card you want to choose? 1, 2, 3 or 4");
-					choose = Choose(4);
+					int cardsInHand = 4;
+					int cardsNotInHand = 0;
+					System.out.println("Which card you want to choose?");
+					for(Card p: Decks.GetPlayerHand()){
+							if(p.getNumber() == 0 && p.getSpecial() == null){
+								cardsNotInHand++;
+							}
+					}
+					for(int i = 0; i < (cardsInHand - cardsNotInHand); i++){
+						System.out.print((i +1) + " ");
+					}
+					System.out.println("");
+					choose = Choose((cardsInHand - cardsNotInHand));
 					Decks.GetPlayerBoard()[pBIndex] = Decks.GetPlayerHand()[choose-1];
+					Decks.UpdatePlayerHand((choose - 1));
 					pBIndex++;
 					Board.CreateBoard();
 					for(Card p: Decks.GetPlayerBoard()){

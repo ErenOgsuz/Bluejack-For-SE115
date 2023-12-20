@@ -130,7 +130,6 @@ public class Game{
 		pBIndex++;
 		Board.CreateBoard();
 		
-		
 		System.out.println("What do you want to do:");
 		System.out.println("1: End Turn, 2: Stand, 3: Choose A Card");
 		

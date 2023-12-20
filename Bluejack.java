@@ -14,6 +14,11 @@ public class BlueJack{
     private static final String FILE_PATH = "game_winners.txt";
 	private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
 	private static LocalDateTime now = LocalDateTime.now();
+	private static String playerName = new String();
+	
+	public static String getPlayerName(){
+		return playerName;
+	}
 	
 	public static void main(String[] args){
 		String[] scores = loadScores();
@@ -42,6 +47,9 @@ public class BlueJack{
         }
 		
 		if(a == 1){
+			System.out.println("What is the players name?");
+			System.out.print("Enter your name:");
+			playerName = sc.next();
 			Decks.ConstructDecks();
 			Game.GameRun();
 			//String score = new String("Player:" + Game.GetPlayerWin() + " - " + "Computer:" + Game.GetCompWin() + ", " dtf.format(now));
@@ -96,7 +104,7 @@ public class BlueJack{
 			newScores[i] = scores[i + 1];
 		}
 
-        newScores[Math.min(MAX_GAMES - 1, scores.length - 1)] = "Player:" + Game.GetPlayerWin() + " - " + "Computer:" + Game.GetCompWin() + ", " + dtf.format(now);
+        newScores[Math.min(MAX_GAMES - 1, scores.length - 1)] = playerName + ":" + Game.GetPlayerWin() + " - " + "Computer:" + Game.GetCompWin() + ", " + dtf.format(now);
 
         FileWriter writer = new FileWriter(FILE_PATH);
 

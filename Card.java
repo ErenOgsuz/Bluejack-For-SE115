@@ -18,11 +18,11 @@ public class Card{
 		return special;
 	}
 	
-	/*
 	public void setNumber(int x){
 		number = x;
-	} 
+	}
 	
+	/*
 	public void setColor(String a){
 		color = a;
 	}

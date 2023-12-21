@@ -199,9 +199,16 @@ public class Game{
 					}
 					System.out.println("");
 					choose = Choose((cardsInHand - cardsNotInHand));
-					Decks.GetPlayerBoard()[pBIndex] = Decks.GetPlayerHand()[choose-1];
+					if(Decks.GetPlayerHand()[choose-1].getNumber() == 0 && Decks.GetPlayerHand()[choose-1].getSpecial().equals("x2")){
+						Decks.GetPlayerBoard()[pBIndex-1].setNumber(Decks.GetPlayerBoard()[pBIndex-1].getNumber() * 2);
+					}else if(Decks.GetPlayerHand()[choose-1].getNumber() == 0 && Decks.GetPlayerHand()[choose-1].getSpecial().equals("+/-")){
+						Decks.GetPlayerBoard()[pBIndex-1].setNumber(Decks.GetPlayerBoard()[pBIndex-1].getNumber() * -1);
+					}else{
+						Decks.GetPlayerBoard()[pBIndex] = Decks.GetPlayerHand()[choose-1];
+						pBIndex++;
+					}
+					
 					Decks.UpdatePlayerHand((choose - 1));
-					pBIndex++;
 					Board.CreateBoard();
 					for(Card p: Decks.GetPlayerBoard()){
 						playerSum = playerSum + p.getNumber();
@@ -309,9 +316,17 @@ public class Game{
 					//An algorithm for computer to choose again
 					System.out.println("Computer played a card");
 					System.out.println("");
-					Decks.GetCompBoard()[cBIndex] = Decks.GetCompHand()[chooseCard];
+					
+					if(Decks.GetCompHand()[chooseCard].getNumber() == 0 && Decks.GetCompHand()[chooseCard].getSpecial().equals("x2")){
+						Decks.GetCompBoard()[cBIndex-1].setNumber(Decks.GetCompBoard()[cBIndex-1].getNumber() * 2);
+					}else if(Decks.GetCompHand()[chooseCard].getNumber() == 0 && Decks.GetCompHand()[chooseCard].getSpecial().equals("+/-")){
+						Decks.GetCompBoard()[cBIndex-1].setNumber(Decks.GetCompBoard()[cBIndex-1].getNumber() * -1);
+					}else{
+						Decks.GetCompBoard()[cBIndex] = Decks.GetCompHand()[chooseCard];
+						cBIndex++;
+					}
+					
 					Decks.GetCompHand()[chooseCard] = new Card(0,"","");
-					cBIndex++;
 					Board.CreateBoard();
 					compSum = 0;
 					for(Card p: Decks.GetCompBoard()){

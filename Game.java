@@ -95,6 +95,8 @@ public class Game{
 			}
 		}while(gameSet < 3);
 		System.out.println("Game Over");
+		System.out.println("Score: " + BlueJack.getPlayerName() + " " + Game.GetPlayerWin() + " - "+ "Computer " + Game.GetCompWin());
+		System.out.println("");
 		
 	}
 	

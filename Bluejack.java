@@ -46,6 +46,8 @@ public class BlueJack{
             }
         }
 		
+		System.out.println("");
+		
 		if(a == 1){
 			System.out.println("What is the players name?");
 			System.out.print("Enter your name: ");

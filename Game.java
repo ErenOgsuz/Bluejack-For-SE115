@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 public class Game{
 	
 	private static Scanner sc = new Scanner(System.in);
@@ -70,9 +71,11 @@ public class Game{
 				if(playerSum > compSum){
 					playerWin = true;
 					SetPlayerWin();
+					System.out.println("Player won the set");
 				}else{
 					compWin = true;
 					SetCompWin();
+					System.out.println("Computer won the set");
 				}
 			}
 			
@@ -125,6 +128,12 @@ public class Game{
                     sc.next();
                 }
             } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please try again.");
+                sc.next();
+            }catch (NoSuchElementException e) {
+                System.out.println("Invalid input. Please try again.");
+                sc.next();
+            }catch (Exception ex) {
                 System.out.println("Invalid input. Please try again.");
                 sc.next();
             }
@@ -234,8 +243,6 @@ public class Game{
 	public static void CompTurn(){
 		System.out.println("Computer's turn:");
 		System.out.println("");
-		
-		Board.CreateBoard();
 		int choose = 2;
 		int chooseCard = 0;
 		compSum = 0;
@@ -243,7 +250,10 @@ public class Game{
 			compSum = compSum + p.getNumber();
 		}
 		
-			//An algorithm for computer to choose
+		//An algorithm for computer to choose
+		if(playerStand && (playerSum <= compSum)){
+			choose = 2;
+		}else{
 			if(compSum < 15){
 				choose = 1;
 			}else if((compSum >= 15 && compSum < 20)|| compSum > 20){
@@ -279,8 +289,10 @@ public class Game{
 			}else{
 				choose = 2;
 			}
+		}
 			
-			switch(choose){
+			
+		switch(choose){
 				case 1:
 					//Computer asks for a card
 					System.out.println("Computer asks for a card");
@@ -348,7 +360,7 @@ public class Game{
 					}
 					compTurn = false;
 					break;
-			}
+		}
 		
 	}
 }

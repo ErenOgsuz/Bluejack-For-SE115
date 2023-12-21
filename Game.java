@@ -52,6 +52,14 @@ public class Game{
 			}
 			}while((!playerBust) && (!compBust) && (!playerWin) && (!compWin));
 			
+			if(playerStand && compStand){
+				if(playerSum > compSum){
+					playerWin = true;
+				}else{
+					compWin = true;
+				}
+			}
+			
 			if(compBust){
 				SetPlayerWin();
 				System.out.println("Player won the set");
@@ -126,18 +134,20 @@ public class Game{
 		System.out.println("Player's turn:");
 		System.out.println("");
 		int choose = 0;
-		Decks.GetPlayerBoard()[pBIndex] = AskCard();
-		pBIndex++;
+		
 		Board.CreateBoard();
 		
 		System.out.println("What do you want to do:");
-		System.out.println("1: End Turn, 2: Stand, 3: Choose A Card");
+		System.out.println("1: Want A Card, 2: Stand, 3: Play A Card");
 		
 		choose = Choose(3);
 			
 			switch(choose){
 				case 1:
-					//end turn
+					//Want a card from dealer
+					Decks.GetPlayerBoard()[pBIndex] = AskCard();
+					pBIndex++;
+					Board.CreateBoard();
 					playerSum = 0;
 					for(Card p: Decks.GetPlayerBoard()){
 						playerSum = playerSum + p.getNumber();
@@ -211,8 +221,7 @@ public class Game{
 	public static void CompTurn(){
 		System.out.println("Computer's turn:");
 		System.out.println("");
-		Decks.GetCompBoard()[cBIndex] = AskCard();
-		cBIndex++;
+		
 		Board.CreateBoard();
 		int choose = 2;
 		int chooseCard = 0;
@@ -260,7 +269,12 @@ public class Game{
 			
 			switch(choose){
 				case 1:
-					//end turn
+					//Computer asks for a card
+					System.out.println("Computer asks for a card");
+					System.out.println("");
+					Decks.GetCompBoard()[cBIndex] = AskCard();
+					cBIndex++;
+					Board.CreateBoard();
 					if(compSum > 20){
 						compBust = true;
 						System.out.println("Computer is bust!");
@@ -275,6 +289,8 @@ public class Game{
 					break;
 				case 2:
 					//stand
+					System.out.println("Computer stands");
+					System.out.println("");
 					if(compSum > 20){
 						compBust = true;
 						System.out.println("Computer is bust!");

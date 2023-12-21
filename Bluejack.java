@@ -50,6 +50,7 @@ public class BlueJack{
 			System.out.println("What is the players name?");
 			System.out.print("Enter your name:");
 			playerName = sc.next();
+			System.out.println("");
 			Decks.ConstructDecks();
 			Game.GameRun();
 			//String score = new String("Player:" + Game.GetPlayerWin() + " - " + "Computer:" + Game.GetCompWin() + ", " dtf.format(now));
@@ -117,7 +118,7 @@ public class BlueJack{
         writer.close();
         System.out.println("Successfully saved the last game!");
     } catch (IOException e) {
-        System.out.println("Error saving winners to file.");
+        System.out.println("Error saving scores to file.");
     }
 }
 

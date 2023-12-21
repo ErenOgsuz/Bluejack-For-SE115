@@ -42,23 +42,17 @@ public class Game{
 			System.out.println("New Set Begins");
 			System.out.println("");
 			do{
-			if(!playerStand){
-				playerTurn = true;
-				PlayerTurn();
-			}
-			if(!compStand){
-				compTurn = true;
-				CompTurn();
-			}
-			}while((!playerBust) && (!compBust) && (!playerWin) && (!compWin));
-			
-			if(playerStand && compStand){
-				if(playerSum > compSum){
-					playerWin = true;
-				}else{
-					compWin = true;
+				if(!playerStand){
+					playerTurn = true;
+					PlayerTurn();
 				}
-			}
+				if(!compStand){
+					compTurn = true;
+					CompTurn();
+				}
+			}while((!playerBust) && (!compBust) && (!playerWin) && (!compWin) && !(compStand && playerStand));
+			
+			
 			
 			if(compBust){
 				SetPlayerWin();
@@ -72,7 +66,17 @@ public class Game{
 			}else if(compWin){
 				SetCompWin();
 				System.out.println("Computer won the set");
+			}else if(playerStand && compStand){
+				if(playerSum > compSum){
+					playerWin = true;
+					SetPlayerWin();
+				}else{
+					compWin = true;
+					SetCompWin();
+				}
 			}
+			
+			
 			compBust = false;
 			playerBust = false;
 			playerWin = false;
@@ -308,9 +312,9 @@ public class Game{
 						//Start a new game
 					}else if(compSum == 20){
 						compWin = true;
-						compStand = true;
 					}
 					compTurn = false;
+					compStand = true;
 					break;
 				case 3:
 					//An algorithm for computer to choose again

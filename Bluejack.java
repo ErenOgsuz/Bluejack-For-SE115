@@ -23,7 +23,7 @@ public class BlueJack{
 	public static void main(String[] args){
 		String[] scores = loadScores();
 		
-		
+		System.out.println("");
 		System.out.println("Play a new game(1) or Show previous games(2)");
 		int a=0;
 		while (true) {
@@ -48,7 +48,7 @@ public class BlueJack{
 		
 		if(a == 1){
 			System.out.println("What is the players name?");
-			System.out.print("Enter your name:");
+			System.out.print("Enter your name: ");
 			playerName = sc.next();
 			System.out.println("");
 			Decks.ConstructDecks();

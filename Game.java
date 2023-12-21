@@ -193,7 +193,9 @@ public class Game{
 							}
 					}
 					for(int i = 0; i < (cardsInHand - cardsNotInHand); i++){
-						System.out.print((i +1) + " ");
+						System.out.print((i +1) + ")"); 
+						Decks.GetPlayerHand()[i].printDeck();
+						System.out.print(" ");
 					}
 					System.out.println("");
 					choose = Choose((cardsInHand - cardsNotInHand));

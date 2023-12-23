@@ -137,6 +137,11 @@ public class Game{
     }
 	
 	public static void compCheck(){
+		compSum = 0;
+		for(Card p: Decks.GetCompBoard()){
+			compSum = compSum + p.getNumber();
+		}
+		
 		if(compSum > 20){
 			compBust = true;
 			System.out.println("Computer is bust!");
@@ -166,6 +171,11 @@ public class Game{
 	}
 	
 	public static void playerCheck(){
+		playerSum = 0;
+		for(Card p: Decks.GetPlayerBoard()){
+			playerSum = playerSum + p.getNumber();
+		}
+		
 		if(playerSum > 20){
 			playerBust = true;
 			System.out.println("You are bust!");
@@ -213,24 +223,15 @@ public class Game{
 					Decks.GetPlayerBoard()[pBIndex] = AskCard();
 					pBIndex++;
 					Board.CreateBoard();
-					playerSum = 0;
-					for(Card p: Decks.GetPlayerBoard()){
-						playerSum = playerSum + p.getNumber();
-					}
 					playerCheck();
 					break;
 				case 2:
 					//stand
-					playerSum = 0;
-					for(Card p: Decks.GetPlayerBoard()){
-						playerSum = playerSum + p.getNumber();
-					}
 					playerCheck();
 					playerStand = true;
 					break;
 				case 3:
 					//play a card from hand
-					playerSum = 0;
 					int cardsInHand = 4;
 					int cardsNotInHand = 0;
 					System.out.println("Which card you want to choose?");
@@ -266,9 +267,7 @@ public class Game{
 					
 					Decks.UpdatePlayerHand((choose - 1));
 					Board.CreateBoard();
-					for(Card p: Decks.GetPlayerBoard()){
-						playerSum = playerSum + p.getNumber();
-					}
+					
 					playerCheck();
 					break;
 			}
@@ -368,10 +367,7 @@ public class Game{
 					
 					Decks.GetCompHand()[chooseCard] = new Card(0,"","");
 					Board.CreateBoard();
-					compSum = 0;
-					for(Card p: Decks.GetCompBoard()){
-						compSum = compSum + p.getNumber();
-					}
+					
 					compCheck();
 					break;
 		}

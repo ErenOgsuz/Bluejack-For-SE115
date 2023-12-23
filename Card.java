@@ -22,14 +22,9 @@ public class Card{
 		number = x;
 	}
 	
-	/*
-	public void setColor(String a){
-		color = a;
-	}
-	
 	public String getColor(){
 		return color;
-	}*/
+	}
 	
 	public void printCard(){
 		if(special == null){

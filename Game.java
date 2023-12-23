@@ -144,6 +144,22 @@ public class Game{
 			//Start a new game
 		}else if(compSum == 20){
 			compStand = true;
+			int checkedCard = 0;
+			int colorBlue = 0;
+			for(Card p: Decks.GetCompBoard()){
+				checkedCard++;
+				if(p.getColor() != null){
+					if(p.getColor().equals("B")){
+						colorBlue++;
+					}
+				}
+			}
+			if(checkedCard == colorBlue){
+				playerBust = true;
+				playerWinRound = 0;
+				compWinRound = 2;
+				gameSet = 3;
+			}
 		}else if(cBIndex == 9 && compSum <= 20){
 			playerBust = true;
 		}
@@ -156,6 +172,22 @@ public class Game{
 			System.out.println("");
 			//Start a new game
 		}else if(playerSum == 20){
+			int checkedCard = 0;
+			int colorBlue = 0;
+			for(Card p: Decks.GetPlayerBoard()){
+				checkedCard++;
+				if(p.getColor() != null){
+					if(p.getColor().equals("B")){
+						colorBlue++;
+					}
+				}
+			}
+			if(checkedCard == colorBlue){
+				compBust = true;
+				playerWinRound = 2;
+				compWinRound = 0;
+				gameSet = 3;
+			}
 			playerStand = true;
 		}else if(pBIndex == 9 && playerSum <= 20){
 			compBust = true;

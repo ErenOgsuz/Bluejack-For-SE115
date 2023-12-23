@@ -147,8 +147,8 @@ public class Game{
 			int checkedCard = 0;
 			int colorBlue = 0;
 			for(Card p: Decks.GetCompBoard()){
-				checkedCard++;
 				if(p.getColor() != null){
+					checkedCard++;
 					if(p.getColor().equals("B")){
 						colorBlue++;
 					}
@@ -175,8 +175,8 @@ public class Game{
 			int checkedCard = 0;
 			int colorBlue = 0;
 			for(Card p: Decks.GetPlayerBoard()){
-				checkedCard++;
 				if(p.getColor() != null){
+					checkedCard++;
 					if(p.getColor().equals("B")){
 						colorBlue++;
 					}

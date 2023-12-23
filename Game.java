@@ -59,7 +59,6 @@ public class Game{
 					System.out.println("Player won the set");
 				}else if(playerSum==compSum){
 					System.out.println("Set is tied");
-					continue;
 				}else{
 					SetCompWin();
 					System.out.println("Computer won the set");
@@ -95,6 +94,11 @@ public class Game{
 	
 	//ask a card
 	public static Card AskCard(){
+		if(Decks.GetDeckTop() == Decks.GetDeckBottom()){
+			playerStand = true;
+			compStand = true;
+			gameSet = 3;
+		}
 		Card asked = Decks.GetDeck()[Decks.GetDeckTop()];
 		Decks.SetDeckTop(-1);
 		return asked;

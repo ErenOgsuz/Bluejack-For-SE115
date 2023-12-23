@@ -141,8 +141,6 @@ public class Game{
 		}else if(compSum == 20){
 			compStand = true;
 		}else if(cBIndex == 9 && compSum <= 20){
-			playerStand = true;
-			compStand = true;
 			playerBust = true;
 		}
 	}
@@ -156,8 +154,6 @@ public class Game{
 		}else if(playerSum == 20){
 			playerStand = true;
 		}else if(pBIndex == 9 && playerSum <= 20){
-			playerStand = true;
-			compStand = true;
 			compBust = true;
 		}
 	}
@@ -214,10 +210,19 @@ public class Game{
 					}
 					System.out.println("");
 					choose = Choose((cardsInHand - cardsNotInHand));
+					
 					if(Decks.GetPlayerHand()[choose-1].getNumber() == 0 && Decks.GetPlayerHand()[choose-1].getSpecial().equals("x2")){
-						Decks.GetPlayerBoard()[pBIndex-1].setNumber(Decks.GetPlayerBoard()[pBIndex-1].getNumber() * 2);
+						if(pBIndex > 0){
+							Decks.GetPlayerBoard()[pBIndex-1].setNumber(Decks.GetPlayerBoard()[pBIndex-1].getNumber() * 2);
+						}
+						Decks.GetPlayerBoard()[pBIndex] = Decks.GetPlayerHand()[choose-1];
+						pBIndex++;
 					}else if(Decks.GetPlayerHand()[choose-1].getNumber() == 0 && Decks.GetPlayerHand()[choose-1].getSpecial().equals("+/-")){
-						Decks.GetPlayerBoard()[pBIndex-1].setNumber(Decks.GetPlayerBoard()[pBIndex-1].getNumber() * -1);
+						if(pBIndex > 0){
+							Decks.GetPlayerBoard()[pBIndex-1].setNumber(Decks.GetPlayerBoard()[pBIndex-1].getNumber() * -1);
+						}
+						Decks.GetPlayerBoard()[pBIndex] = Decks.GetPlayerHand()[choose-1];
+						pBIndex++;
 					}else{
 						Decks.GetPlayerBoard()[pBIndex] = Decks.GetPlayerHand()[choose-1];
 						pBIndex++;
@@ -309,9 +314,17 @@ public class Game{
 					System.out.println("");
 					
 					if(Decks.GetCompHand()[chooseCard].getNumber() == 0 && Decks.GetCompHand()[chooseCard].getSpecial().equals("x2")){
-						Decks.GetCompBoard()[cBIndex-1].setNumber(Decks.GetCompBoard()[cBIndex-1].getNumber() * 2);
+						if(cBIndex > 0){
+							Decks.GetCompBoard()[cBIndex-1].setNumber(Decks.GetCompBoard()[cBIndex-1].getNumber() * 2);
+						}
+						Decks.GetCompBoard()[cBIndex] = Decks.GetCompHand()[chooseCard];
+						cBIndex++;
 					}else if(Decks.GetCompHand()[chooseCard].getNumber() == 0 && Decks.GetCompHand()[chooseCard].getSpecial().equals("+/-")){
-						Decks.GetCompBoard()[cBIndex-1].setNumber(Decks.GetCompBoard()[cBIndex-1].getNumber() * -1);
+						if(cBIndex > 0){
+							Decks.GetCompBoard()[cBIndex-1].setNumber(Decks.GetCompBoard()[cBIndex-1].getNumber() * -1);
+						}
+						Decks.GetCompBoard()[cBIndex] = Decks.GetCompHand()[chooseCard];
+						cBIndex++;
 					}else{
 						Decks.GetCompBoard()[cBIndex] = Decks.GetCompHand()[chooseCard];
 						cBIndex++;

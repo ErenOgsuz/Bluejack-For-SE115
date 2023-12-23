@@ -99,30 +99,30 @@ public class BlueJack{
     }
 	
 	private static void saveScore(String[] scores) {
-    System.out.println("Saving game...");
-    try {
-        String[] newScores = new String[MAX_GAMES];
+		System.out.println("Saving game...");
+		try {
+			String[] newScores = new String[MAX_GAMES];
 		
-		for(int i = 0; i < scores.length-1; i++){
-			newScores[i] = scores[i + 1];
+			for(int i = 0; i < scores.length-1; i++){
+				newScores[i] = scores[i + 1];
+			}
+
+			newScores[Math.min(MAX_GAMES - 1, scores.length - 1)] = playerName + ":" + Game.GetPlayerWin() + " - " + "Computer:" + Game.GetCompWin() + ", " + dtf.format(now);
+
+			FileWriter writer = new FileWriter(FILE_PATH);
+
+			for (String score : newScores) {
+				if (score != null) {
+					writer.write(score + "\n");
+				}
+			}
+
+			writer.close();
+			System.out.println("Successfully saved the last game!");
+		} catch (IOException e) {
+			System.out.println("Error saving scores to file.");
 		}
-
-        newScores[Math.min(MAX_GAMES - 1, scores.length - 1)] = playerName + ":" + Game.GetPlayerWin() + " - " + "Computer:" + Game.GetCompWin() + ", " + dtf.format(now);
-
-        FileWriter writer = new FileWriter(FILE_PATH);
-
-        for (String score : newScores) {
-            if (score != null) {
-                writer.write(score + "\n");
-            }
-        }
-
-        writer.close();
-        System.out.println("Successfully saved the last game!");
-    } catch (IOException e) {
-        System.out.println("Error saving scores to file.");
-    }
-}
+	}
 
 }
 

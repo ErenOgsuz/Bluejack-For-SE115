@@ -5,8 +5,6 @@ public class Game{
 	
 	private static Scanner sc = new Scanner(System.in);
 	
-	private static boolean playerTurn = true;
-	private static boolean compTurn = false;
 	private static boolean playerStand = false;
 	private static boolean compStand = false;
 	private static boolean playerBust = false;
@@ -42,11 +40,9 @@ public class Game{
 			System.out.println("");
 			do{
 				if(!playerStand){
-					playerTurn = true;
 					PlayerTurn();
 				}
 				if(!compStand){
-					compTurn = true;
 					CompTurn();
 				}
 			}while((!playerBust) && (!compBust) && !(compStand && playerStand));
@@ -169,7 +165,6 @@ public class Game{
 					}else if(playerSum == 20){
 						playerStand = true;
 					}
-					playerTurn = false;
 					break;
 				case 2:
 					//stand
@@ -184,7 +179,6 @@ public class Game{
 					}else if(playerSum == 20){
 						playerStand = true;
 					}
-					playerTurn = false;
 					playerStand = true;
 					break;
 				case 3:
@@ -226,7 +220,6 @@ public class Game{
 					}else if(playerSum == 20){
 						playerStand = true;
 					}
-					playerTurn = false;
 					break;
 			}
 	}
@@ -299,7 +292,6 @@ public class Game{
 					}else if(compSum == 20){
 						compStand = true;
 					}
-					compTurn = false;
 					break;
 				case 2:
 					//stand
@@ -314,7 +306,6 @@ public class Game{
 					}else if(compSum == 20){
 						compStand = true;
 					}
-					compTurn = false;
 					compStand = true;
 					break;
 				case 3:
@@ -345,7 +336,6 @@ public class Game{
 					}else if(compSum == 20){
 						compStand = true;
 					}
-					compTurn = false;
 					break;
 		}
 		

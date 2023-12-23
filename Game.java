@@ -12,8 +12,8 @@ public class Game{
 	private static int playerWinRound = 0;
 	private static int compWinRound = 0;
 	private static int gameSet = 0;
-	private static int pBIndex = 0;
-	private static int cBIndex = 0;
+	private static int pBIndex = 0; //player board index
+	private static int cBIndex = 0; //computer board index
 	private static int playerSum = 0;
 	private static int compSum = 0;
 	
@@ -47,8 +47,6 @@ public class Game{
 				}
 			}while((!playerBust) && (!compBust) && !(compStand && playerStand));
 			
-			
-			
 			if(compBust){
 				SetPlayerWin();
 				System.out.println("Player won the set");
@@ -70,7 +68,6 @@ public class Game{
 				SetCompWin();
 				System.out.println("Computer won the set");
 			}
-			
 			
 			compBust = false;
 			playerBust = false;
@@ -135,6 +132,36 @@ public class Game{
         return a;
     }
 	
+	public static void compCheck(){
+		if(compSum > 20){
+			compBust = true;
+			System.out.println("Computer is bust!");
+			System.out.println("");
+			//Start a new game
+		}else if(compSum == 20){
+			compStand = true;
+		}else if(cBIndex == 9 && compSum <= 20){
+			playerStand = true;
+			compStand = true;
+			playerBust = true;
+		}
+	}
+	
+	public static void playerCheck(){
+		if(playerSum > 20){
+			playerBust = true;
+			System.out.println("You are bust!");
+			System.out.println("");
+			//Start a new game
+		}else if(playerSum == 20){
+			playerStand = true;
+		}else if(pBIndex == 9 && playerSum <= 20){
+			playerStand = true;
+			compStand = true;
+			compBust = true;
+		}
+	}
+	
 	//player chooses (end turn, stand, play a card from hand)
 	public static void PlayerTurn(){
 		System.out.println("Player's turn:");
@@ -158,13 +185,7 @@ public class Game{
 					for(Card p: Decks.GetPlayerBoard()){
 						playerSum = playerSum + p.getNumber();
 					}
-					if(playerSum > 20){
-						playerBust = true;
-						System.out.println("You are bust!");
-						//Start a new game
-					}else if(playerSum == 20){
-						playerStand = true;
-					}
+					playerCheck();
 					break;
 				case 2:
 					//stand
@@ -172,13 +193,7 @@ public class Game{
 					for(Card p: Decks.GetPlayerBoard()){
 						playerSum = playerSum + p.getNumber();
 					}
-					if(playerSum > 20){
-						playerBust = true;
-						System.out.println("You are bust!");
-						//Start a new game
-					}else if(playerSum == 20){
-						playerStand = true;
-					}
+					playerCheck();
 					playerStand = true;
 					break;
 				case 3:
@@ -213,13 +228,7 @@ public class Game{
 					for(Card p: Decks.GetPlayerBoard()){
 						playerSum = playerSum + p.getNumber();
 					}
-					if(playerSum > 20){
-						playerBust = true;
-						System.out.println("You are bust!");
-						//Start a new game
-					}else if(playerSum == 20){
-						playerStand = true;
-					}
+					playerCheck();
 					break;
 			}
 	}
@@ -284,28 +293,14 @@ public class Game{
 					Decks.GetCompBoard()[cBIndex] = AskCard();
 					cBIndex++;
 					Board.CreateBoard();
-					if(compSum > 20){
-						compBust = true;
-						System.out.println("Computer is bust!");
-						System.out.println("");
-						//Start a new game
-					}else if(compSum == 20){
-						compStand = true;
-					}
+					compCheck();
 					break;
 				case 2:
 					//stand
 					System.out.println("Computer stands");
 					System.out.println("");
 					Board.CreateBoard();
-					if(compSum > 20){
-						compBust = true;
-						System.out.println("Computer is bust!");
-						System.out.println("");
-						//Start a new game
-					}else if(compSum == 20){
-						compStand = true;
-					}
+					compCheck();
 					compStand = true;
 					break;
 				case 3:
@@ -328,14 +323,7 @@ public class Game{
 					for(Card p: Decks.GetCompBoard()){
 						compSum = compSum + p.getNumber();
 					}
-					if(compSum > 20){
-							compBust = true;
-							System.out.println("Computer is bust!");
-							System.out.println("");
-							//Start a new game
-					}else if(compSum == 20){
-						compStand = true;
-					}
+					compCheck();
 					break;
 		}
 		

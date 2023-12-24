@@ -21,46 +21,50 @@ public class BlueJack {
 
 	public static void main(String[] args) {
 		String[] scores = loadScores();
-
-		System.out.println("");
-		System.out.println("Play a new game(1) or Show previous games(2)");
-		int a = 0;
-		while (true) {
-			try {
-				System.out.print("Enter your choice: ");
-				if (sc.hasNextInt()) {
-					a = sc.nextInt();
-					if (a > 0 && a <= 2) {
-						break;
+		
+		while(true){
+			System.out.println("");
+			System.out.println("1: New Game, 2:Game History, 3:Exit ");
+			int a = 0;
+			while (true) {
+				try {
+					System.out.print("Enter your choice: ");
+					if (sc.hasNextInt()) {
+						a = sc.nextInt();
+						if (a > 0 && a <= 3) {
+							break;
+						} else {
+							System.out.println("Invalid input. Please try again.");
+						}
 					} else {
 						System.out.println("Invalid input. Please try again.");
+						sc.next();
 					}
-				} else {
+				} catch (InputMismatchException e) {
 					System.out.println("Invalid input. Please try again.");
 					sc.next();
 				}
-			} catch (InputMismatchException e) {
-				System.out.println("Invalid input. Please try again.");
-				sc.next();
+			}
+
+			System.out.println("");
+
+			if (a == 1) {
+				System.out.println("What is the players name?");
+				System.out.print("Enter your name: ");
+				playerName = sc.next();
+				System.out.println("");
+				Decks.ConstructDecks();
+				Game.GameRun();
+				// String score = new String("Player:" + Game.GetPlayerWin() + " - " +
+				// "Computer:" + Game.GetCompWin() + ", " dtf.format(now));
+				saveScore(scores);
+			} else if (a == 2) {
+				printScores(scores);
+			}else{
+				System.out.println("Closing...");
+				break;
 			}
 		}
-
-		System.out.println("");
-
-		if (a == 1) {
-			System.out.println("What is the players name?");
-			System.out.print("Enter your name: ");
-			playerName = sc.next();
-			System.out.println("");
-			Decks.ConstructDecks();
-			Game.GameRun();
-			// String score = new String("Player:" + Game.GetPlayerWin() + " - " +
-			// "Computer:" + Game.GetCompWin() + ", " dtf.format(now));
-			saveScore(scores);
-		} else if (a == 2) {
-			printScores(scores);
-		}
-
 		// cd OneDrive\Masaüstü\BluejackProject\Bluejack-For-SE115
 
 	}

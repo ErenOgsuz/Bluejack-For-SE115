@@ -20,9 +20,9 @@ public class BlueJack {
 	}
 
 	public static void main(String[] args) {
-		String[] scores = loadScores();
-		
 		while(true){
+			String[] scores = loadScores();
+			
 			System.out.println("");
 			System.out.println("1: New Game, 2:Game History, 3:Exit ");
 			int a = 0;
